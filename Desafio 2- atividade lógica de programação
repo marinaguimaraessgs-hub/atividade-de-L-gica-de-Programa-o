@@ -1,0 +1,268 @@
+# ============================================================
+# QUESTÃO 1 - CÁLCULO DO FATORIAL
+# ============================================================
+# O programa recebe um número e calcula seu fatorial
+# utilizando uma estrutura de repetição while.
+
+numero = int(input("Digite um número para calcular o fatorial: "))
+
+fatorial = 1
+contador = 1
+
+while contador <= numero:
+    fatorial = fatorial * contador
+    contador = contador + 1
+
+print("O fatorial de", numero, "é:", fatorial)
+
+
+# ============================================================
+# QUESTÃO 2 - CRESCIMENTO POPULACIONAL
+# ============================================================
+# O país A possui 90.000 habitantes e cresce 5% ao ano.
+# O país B possui 200.000 habitantes e cresce 1,5% ao ano.
+# O programa calcula quantos anos são necessários para que
+# a população de A ultrapasse ou iguale a população de B.
+
+populacao_a = 90000
+populacao_b = 200000
+anos = 0
+
+while populacao_a < populacao_b:
+    populacao_a = populacao_a * 1.05
+    populacao_b = populacao_b * 1.015
+    anos = anos + 1
+
+print("\nQUESTÃO 2")
+print("Anos necessários:", anos)
+print("População de A:", populacao_a)
+print("População de B:", populacao_b)
+
+
+# ============================================================
+# QUESTÃO 3 - RESUMO ESTATÍSTICO DE NOTAS
+# ============================================================
+# O programa lê as notas dos alunos utilizando while.
+# Nota >= 7,0  -> aprovado
+# Nota entre 5,0 e 6,9 -> recuperação
+# Nota < 5,0 -> reprovado
+#
+# A leitura termina quando o usuário digita "sair".
+# Valores fora de 0 a 10 são considerados inválidos,
+# mas não encerram o programa.
+#
+# Ao final, são apresentados:
+# - média da turma
+# - maior nota
+# - menor nota
+# - percentual de aprovação
+# - situação geral da turma
+
+soma = 0
+quantidade = 0
+aprovados = 0
+maior = None
+menor = None
+
+print("\nQUESTÃO 3")
+
+while True:
+    entrada = input("Digite uma nota ou 'sair' para encerrar: ")
+
+    if entrada.lower() == "sair":
+        break
+
+    try:
+        nota = float(entrada)
+
+        # Verifica se a nota está entre 0 e 10
+        if nota < 0 or nota > 10:
+            print("Nota inválida! Digite uma nota entre 0 e 10.")
+            continue
+
+        # Acumula os valores para calcular a média
+        soma = soma + nota
+        quantidade = quantidade + 1
+
+        # Verifica a maior nota
+        if maior is None or nota > maior:
+            maior = nota
+
+        # Verifica a menor nota
+        if menor is None or nota < menor:
+            menor = nota
+
+        # Classificação individual do aluno
+        if nota >= 7:
+            print("Aluno aprovado.")
+            aprovados = aprovados + 1
+
+        elif nota >= 5:
+            print("Aluno em recuperação.")
+
+        else:
+            print("Aluno reprovado.")
+
+    except ValueError:
+        # Caso o usuário digite algo que não seja número
+        # e também não seja "sair", a leitura continua.
+        print("Entrada inválida! Digite uma nota ou 'sair'.")
+
+
+# Impede divisão por zero caso nenhuma nota válida seja informada
+if quantidade > 0:
+
+    media = soma / quantidade
+    percentual_aprovacao = (aprovados / quantidade) * 100
+
+    print("\n--- RESUMO DA TURMA ---")
+    print("Média da turma:", media)
+    print("Maior nota:", maior)
+    print("Menor nota:", menor)
+    print("Percentual de aprovação:", percentual_aprovacao, "%")
+
+    # Classificação geral da turma
+    if percentual_aprovacao >= 70:
+        print("Situação geral: desempenho satisfatório.")
+    else:
+        print("Situação geral: desempenho não satisfatório.")
+
+else:
+    print("Nenhuma nota válida foi informada.")
+
+
+# ============================================================
+# QUESTÃO 4 - SELEÇÃO DE ATRIBUTOS
+# ============================================================
+# O programa calcula a quantidade de combinações de atributos
+# utilizando a fórmula:
+#
+# C(n,r) = n! / (r! * (n-r)!)
+#
+# A ordem dos atributos não altera a combinação.
+# Por exemplo: escolher A e B é a mesma combinação que B e A.
+#
+# O fatorial é calculado manualmente utilizando while,
+# sem utilizar uma função pronta de fatorial.
+#
+# Até 10.000 combinações -> busca exaustiva viável
+# Mais de 10.000 -> busca exaustiva não viável
+
+print("\nQUESTÃO 4")
+
+n = int(input("Digite a quantidade de atributos disponíveis (n): "))
+r = int(input("Digite a quantidade de atributos a selecionar (r): "))
+
+# Validação dos parâmetros
+if r < 0 or r > n:
+
+    print("Valores inválidos! É necessário que 0 <= r <= n.")
+
+else:
+
+    # Calcula n!
+    fatorial_n = 1
+    contador = 1
+
+    while contador <= n:
+        fatorial_n = fatorial_n * contador
+        contador = contador + 1
+
+    # Calcula r!
+    fatorial_r = 1
+    contador = 1
+
+    while contador <= r:
+        fatorial_r = fatorial_r * contador
+        contador = contador + 1
+
+    # Calcula (n-r)!
+    fatorial_nr = 1
+    contador = 1
+
+    while contador <= (n - r):
+        fatorial_nr = fatorial_nr * contador
+        contador = contador + 1
+
+    # Aplica a fórmula da combinação
+    combinacoes = fatorial_n / (fatorial_r * fatorial_nr)
+
+    print("Quantidade de subconjuntos possíveis:", combinacoes)
+
+    # Verifica se a busca exaustiva é viável
+    if combinacoes <= 10000:
+        print("Busca exaustiva: viável.")
+    else:
+        print("Busca exaustiva: não viável.")
+
+    print("A ordem dos atributos não altera a combinação,")
+    print("pois selecionar A e B é igual a selecionar B e A.")
+
+
+# ============================================================
+# QUESTÃO 5 - CRESCIMENTO DA POPULAÇÃO DURANTE 5 ANOS
+# ============================================================
+# A população inicial é de 2727 indivíduos.
+# A taxa de crescimento é de 4% ao ano.
+# O programa mostra a população ao final de cada ano,
+# durante um período de 5 anos.
+
+print("\nQUESTÃO 5")
+
+populacao = 2727
+ano = 1
+
+while ano <= 5:
+
+    # Aplica o crescimento de 4%
+    populacao = populacao * 1.04
+
+    print("População ao final do ano", ano, ":", populacao)
+
+    ano = ano + 1
+
+
+# ============================================================
+# QUESTÃO 6 - PROBABILIDADE EXPERIMENTAL
+# ============================================================
+# O dado é lançado 20 vezes.
+# O programa recebe o resultado de cada lançamento e conta
+# quantas vezes apareceu um número par.
+#
+# Os números pares de um dado são:
+# 2, 4 e 6.
+#
+# Ao final, calcula:
+# probabilidade = quantidade de pares / quantidade de lançamentos
+
+print("\nQUESTÃO 6")
+
+quantidade_pares = 0
+lancamento = 1
+
+while lancamento <= 20:
+
+    resultado = int(input(
+        "Digite o resultado do lançamento " + str(lancamento) + ": "
+    ))
+
+    # Verifica se o resultado pertence a um dado
+    if resultado >= 1 and resultado <= 6:
+
+        # Verifica se o resultado é par
+        if resultado % 2 == 0:
+            quantidade_pares = quantidade_pares + 1
+
+        lancamento = lancamento + 1
+
+    else:
+        # Se for inválido, não conta o lançamento
+        # e pede novamente.
+        print("Resultado inválido! Digite um número de 1 a 6.")
+
+# Calcula a probabilidade experimental
+probabilidade = quantidade_pares / 20
+
+print("Quantidade de números pares:", quantidade_pares)
+print("Probabilidade experimental:", probabilidade)
+print("Probabilidade em porcentagem:", probabilidade * 100, "%")
