@@ -1,0 +1,230 @@
+# ============================================================
+# DESAFIO PRÁTICO E ANALÍTICO DE LISTAS
+# ============================================================
+
+# QUESTÃO 1
+# a) Refaça o código utilizando a estrutura FOR.
+
+numeros = [0, 0, 0, 0, 0]
+
+for x in range(5):
+    numeros[x] = float(input("Digite um número qualquer: "))
+
+for y in range(5):
+    print(numeros[y])
+
+
+# b) O que acontece se colocarmos while x <= 4?
+# Nada muda. Ele também vai repetir 5 vezes, de 0 até 4.
+
+
+# c) Esse código funcionaria caso quiséssemos inserir mais de 5 elementos?
+# Não. A lista só tem 5 posições. Se tentar colocar mais, vai dar erro.
+
+
+# d) Qual a problemática da alternativa anterior?
+# A quantidade de elementos fica limitada e o código precisa ser
+# alterado para aceitar mais elementos.
+
+
+# e) Refaça o código melhorando os problemas encontrados.
+
+numeros = []
+
+quantidade = int(input("Quantos números você deseja inserir? "))
+
+for i in range(quantidade):
+    numero = float(input("Digite um número qualquer: "))
+    numeros.append(numero)
+
+for numero in numeros:
+    print(numero)
+
+
+# ============================================================
+# QUESTÃO 2
+# ============================================================
+
+# a) Qual a saída final da variável x?
+# O valor final de x será 3.
+
+
+# b) Podemos considerar o resultado final de x como o tamanho da lista?
+# Nesse caso, sim, porque a lista tem 3 elementos. Mas o ideal é usar len(L).
+
+
+# c) O que aconteceria se atualizarmos a lista para L=[7,8,9,10,11,12]?
+# Ele vai mostrar somente 7, 8 e 9, porque o código está limitado
+# a 3 repetições.
+
+
+# d) Reescreva o código para funcionar para qualquer lista L.
+
+L = [7, 8, 9, 10, 11, 12]
+
+x = 0
+
+while x < len(L):
+    print(L[x])
+    x += 1
+
+
+# ============================================================
+# QUESTÃO 3
+# Faça um programa que leia duas listas, A e B, e gere uma terceira
+# com os elementos das duas primeiras.
+# ============================================================
+
+A = ['mouse', 'teclado', 'monitor', 'estabilizador']
+
+B = ['memória', 'cpu', 'ssd', 'chipset', 'rom']
+
+C = []
+
+for elemento in A:
+    C.append(elemento)
+
+for elemento in B:
+    C.append(elemento)
+
+print(C)
+
+
+# ============================================================
+# QUESTÃO 4
+# Faça um programa que percorra duas listas, A e B, e gere uma
+# terceira sem elementos repetidos.
+# ============================================================
+
+A = ['Python', 'Java', 'C', 'PHP', 'JavaScript', 'Dart']
+
+B = ['C++', 'Python', 'Java', 'Julia', 'Go', 'JavaScript']
+
+C = []
+
+for elemento in A:
+    if elemento not in C:
+        C.append(elemento)
+
+for elemento in B:
+    if elemento not in C:
+        C.append(elemento)
+
+print(C)
+
+
+# ============================================================
+# QUESTÃO 5
+# ============================================================
+
+# a) Explique a função das linhas 20, 24, 25 e 27.
+#
+# Linha 20: Cria a variável achou como falsa.
+# Linha 24: Muda achou para verdadeiro quando encontra o valor.
+# Linha 25: Para o laço.
+# Linha 27: Verifica se o valor foi encontrado.
+
+
+# b) Refaça o código sem utilizar a variável achou.
+
+L = [15, 7, 27, 39]
+
+p = int(input("Digite o valor a procurar: "))
+
+for x in range(len(L)):
+    if L[x] == p:
+        print(f"{p} achado na posição {x}")
+        break
+else:
+    print(f"{p} não encontrado")
+
+
+# ============================================================
+# QUESTÃO 6
+# ============================================================
+
+# a) Modifique o código usando FOR para as duas repetições.
+
+L = []
+
+for i in range(100):
+    n = int(input("Digite um número ou 0 para sair: "))
+
+    if n == 0:
+        break
+
+    L.append(n)
+
+for n in L:
+    print(n)
+
+
+# b) A alternativa anterior teve êxito? Justifique.
+# Não completamente. O segundo for funciona bem, mas o primeiro
+# seria melhor com while, pois não sabemos quantos números serão digitados.
+
+
+# ============================================================
+# QUESTÃO 7
+# ============================================================
+
+# a) Código para descobrir o maior número da lista.
+
+T = [-10, -8, 0, 1, 2, 20, -2, -4]
+
+maior = T[0]
+
+for i in range(len(T)):
+    if T[i] > maior:
+        maior = T[i]
+
+print(f"O maior número da lista é {maior}")
+
+
+# b) Código para descobrir o menor número da lista.
+
+T = [-10, -8, 0, 1, 2, 20, -2, -4]
+
+menor = T[0]
+
+for i in range(len(T)):
+    if T[i] < menor:
+        menor = T[i]
+
+print(f"O menor número da lista é {menor}")
+
+
+# c) Código para mostrar endereço e elemento na lista.
+
+T = [-10, -8, 0, 1, 2, 20, -2, -4]
+
+for i in range(len(T)):
+    print(f"Endereço: {i} - Elemento: {T[i]}")
+
+
+# ============================================================
+# QUESTÃO 8
+# Receber números ou palavras, armazenar em listas diferentes
+# e encerrar quando o usuário digitar x ou X.
+# ============================================================
+
+palavras = []
+numeros = []
+
+while True:
+    entrada = input("Digite um número ou uma palavra (x para sair): ")
+
+    if entrada.lower() == 'x':
+        break
+
+    if entrada.isdigit():
+        numeros.append(entrada)
+    else:
+        palavras.append(entrada)
+
+print("Palavras:", palavras)
+print("Números:", numeros)
+
+total = len(palavras) + len(numeros)
+
+print("Quantidade total de coisas digitadas:", total)
