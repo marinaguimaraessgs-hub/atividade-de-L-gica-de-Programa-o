@@ -1,0 +1,220 @@
+# ==========================================
+# DESAFIO PRÁTICO 3 - LÓGICA E PROGRAMAÇÃO
+# ==========================================
+
+
+# ------------------------------------------
+# QUESTÃO 1
+# ------------------------------------------
+'''
+1. Programa que recebe 10 idades e calcula:
+a) Média das idades
+b) Mediana
+c) Moda
+'''
+print("=== QUESTÃO 1 ===")
+idades = []
+for i in range(1, 11):
+    idade = int(input(f"Digite a {i}ª idade: "))
+    idades.append(idade)
+
+media_idades = statistics.mean(idades)
+mediana_idades = statistics.median(idades)
+# statistics.multimode é utilizado para tratar caso haja mais de uma moda
+moda_idades = statistics.multimode(idades) 
+
+print(f"a) Média das idades: {media_idades:.2f}")
+print(f"b) Mediana das idades: {mediana_idades:.2f}")
+print(f"c) Moda das idades: {moda_idades}\n")
+
+
+# ------------------------------------------
+# QUESTÃO 2
+# ------------------------------------------
+'''
+2. Escolha de bolas ao acaso:
+a) Contar quantas bolas existem na caixa
+b) Contar quantas são vermelhas
+c) Calcular a probabilidade de escolher uma bola vermelha
+d) Apresentar a probabilidade em fração e porcentagem
+'''
+print("=== QUESTÃO 2 ===")
+bolas = ["vermelha", "azul", "verde", "vermelha", "amarela", "azul", "vermelha", "verde", "azul", "vermelha"]
+
+total_bolas = len(bolas)
+bolas_vermelhas = bolas.count("vermelha")
+probabilidade = bolas_vermelhas / total_bolas
+
+fracao_prob = Fraction(bolas_vermelhas, total_bolas)
+porcentagem_prob = probabilidade * 100
+
+print(f"a) Total de bolas na caixa: {total_bolas}")
+print(f"b) Total de bolas vermelhas: {bolas_vermelhas}")
+print(f"c) Probabilidade de escolher vermelha: {probabilidade:.2f}")
+print(f"d) Probabilidade em fração: {fracao_prob} | Probabilidade em porcentagem: {porcentagem_prob:.1f}%\n")
+
+
+# ------------------------------------------
+# QUESTÃO 3
+# ------------------------------------------
+'''
+3. Relatório do boletim dos alunos
+'''
+print("=== QUESTÃO 3 ===")
+alunos = [
+    ["Ana", 7.5, 8.0, 9.0],
+    ["Bruno", 6.0, 5.5, 7.0],
+    ["Carlos", 9.0, 8.5, 10.0],
+    ["Daniela", 5.0, 6.0, 4.5],
+    ["Eduardo", 8.0, 7.5, 6.5]
+]
+
+medias_alunos = []
+aprovados = 0
+reprovados = 0
+
+print("--- Relatório de Alunos ---")
+for aluno in alunos:
+    nome = aluno[0]
+    media = sum(aluno[1:]) / 3
+    medias_alunos.append((nome, media))
+    
+    if media >= 7.0:
+        status = "Aprovado"
+        aprovados += 1
+    else:
+        status = "Reprovado"
+        reprovados += 1
+        
+    # Exibe a) Nome, b) Média, c) Status de aprovação
+    print(f"Aluno: {nome:<10} | Média: {media:.2f} | Status: {status}")
+
+# d) Média geral da turma
+media_geral = sum(m[1] for m in medias_alunos) / len(medias_alunos)
+
+# e) Nome do aluno com a maior média
+aluno_maior_media = max(medias_alunos, key=lambda x: x[1])[0]
+
+# f) Nome do aluno com a menor média
+aluno_menor_media = min(medias_alunos, key=lambda x: x[1])[0]
+
+print("\n--- Estatísticas da Turma ---")
+print(f"d) Média geral da turma: {media_geral:.2f}")
+print(f"e) Aluno com maior média: {aluno_maior_media}")
+print(f"f) Aluno com menor média: {aluno_menor_media}")
+print(f"g) Quantidade de aprovados: {aprovados}")
+print(f"h) Quantidade de reprovados: {reprovados}\n")
+
+
+# ------------------------------------------
+# QUESTÃO 4
+# ------------------------------------------
+'''
+4. Reescrita do código de acréscimo de 10% utilizando List Comprehension
+'''
+print("=== QUESTÃO 4 ===")
+precos = [50, 80, 120, 35, 200, 75]
+
+# List Comprehension para aplicar 10% de acréscimo
+novos_precos = [preco * 1.10 for preco in precos]
+
+print(f"Novos preços (com List Comprehension): {novos_precos}\n")
+
+
+# ------------------------------------------
+# QUESTÃO 5
+# ------------------------------------------
+'''
+5. Cálculo de valor do estacionamento com base na permanência
+'''
+print("=== QUESTÃO 5 ===")
+
+def calcular_estacionamento(horas):
+    if horas <= 1:
+        return 5.00
+    elif horas <= 3:
+        return 10.00
+    elif horas <= 5:
+        return 15.00
+    else:
+        return 20.00
+
+# Código principal
+horas_permanencia = float(input("Digite o tempo de permanência no estacionamento (em horas): "))
+valor_pagar = calcular_estacionamento(horas_permanencia)
+print(f"Valor a ser pago: R$ {valor_pagar:.2f}\n")
+
+
+# ------------------------------------------
+# QUESTÃO 6
+# ------------------------------------------
+'''
+6. Função para calcular idade e verificar se é maior de idade (com Desafio)
+'''
+print("=== QUESTÃO 6 ===")
+
+def calcular_idade(ano_nascimento, ano_atual):
+    idade = ano_atual - ano_nascimento
+    
+    # Desafio: verificar se é maior ou menor de idade
+    if idade >= 18:
+        classificacao = "Maior de idade"
+    else:
+        classificacao = "Menor de idade"
+        
+    return idade, classificacao
+
+# Código principal
+ano_nasc = int(input("Digite o ano de nascimento: "))
+ano_atual = datetime.now().year
+
+idade, status_idade = calcular_idade(ano_nasc, ano_atual)
+print(f"Idade: {idade} anos | Status: {status_idade}\n")
+
+
+# ------------------------------------------
+# QUESTÃO 7
+# ------------------------------------------
+'''
+7. Funções para área de figuras geométricas (Triângulo, Trapézio, Losango)
+'''
+print("=== QUESTÃO 7 ===")
+
+def area_triangulo(base, altura):
+    return (base * altura) / 2
+
+def area_trapezio(base_maior, base_menor, altura):
+    return ((base_maior + base_menor) * altura) / 2
+
+def area_losango(diagonal_maior, diagonal_menor):
+    return (diagonal_maior * diagonal_menor) / 2
+
+# Exemplos de uso das funções
+print(f"Área do Triângulo (base 10, altura 5): {area_triangulo(10, 5)}")
+print(f"Área do Trapézio (base maior 10, base menor 6, altura 4): {area_trapezio(10, 6, 4)}")
+print(f"Área do Losango (diagonal maior 8, diagonal menor 6): {area_losango(8, 6)}\n")
+
+
+# ------------------------------------------
+# QUESTÃO 8
+# ------------------------------------------
+'''
+8. Validação de senha: mínimo 8 caracteres e pelo menos um número (com Desafio)
+'''
+print("=== QUESTÃO 8 ===")
+
+def validar_senha(senha):
+    # Regra principal: pelo menos 8 caracteres
+    tem_tamanho_minimo = len(senha) >= 8
+    
+    # Desafio: conter pelo menos um número
+    tem_numero = any(char.isdigit() for char in senha)
+    
+    return tem_tamanho_minimo and tem_numero
+
+# Teste com input
+senha_usuario = input("Digite a senha para validação: ")
+if validar_senha(senha_usuario):
+    print("Senha VÁLIDA (Atende a todos os critérios)!")
+else:
+    print("Senha INVÁLIDA (Precisa ter no mínimo 8 caracteres e conter pelo menos um número).")
